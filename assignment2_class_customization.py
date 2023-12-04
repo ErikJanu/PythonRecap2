@@ -22,13 +22,16 @@ class Point:
         return (self.x ** 2 + self.y ** 2) ** (1 / 2)
 
 
-class Shape:
+class Shape(list[Point, ...]):
 
     def __init__(self, *points):
-        self.points = list(points)
+        super().__init__(points)
+
+    def __str__(self):
+        return f"{[point for point in self]}"
 
     def __repr__(self):
-        return repr(self.points)
+        return self.__str__()
 
     # defines behaviour for "=="
     def __eq__(self, other):
@@ -40,10 +43,10 @@ class Shape:
 
     def centroid(self) -> Point:
         sum_x, sum_y = 0, 0
-        for point in self.points:
+        for point in self:
             sum_x += point.x
             sum_y += point.y
-        return Point(sum_x / len(self.points), sum_y / len(self.points))
+        return Point(sum_x / len(self), sum_y / len(self))
 
 
 p1 = Point(2.3, 43.14)
