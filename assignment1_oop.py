@@ -1,12 +1,9 @@
 import math
 
 
-class Point:
-    def __init__(self, x: int, y: int):
-        self._values = (x, y)
-
-    def __getitem__(self, index):
-        return self._values[index]
+class Point(tuple[int, int]):
+    def __new__(cls, x, y):
+        return tuple.__new__(Point, (x, y))
 
 
 class Canvas(list[str]):
@@ -104,7 +101,7 @@ class Canvas(list[str]):
 
 
 canvas = Canvas(100, 40)
-print(canvas)
+canvas.print()
 print(Point(1, 2))
 
 # A simple line
@@ -112,7 +109,7 @@ canvas.draw_line(Point(10, 4), Point(92, 19), "+")
 # A polygon with five points, the last point will be connected to the first one
 canvas.draw_polygon(Point(7, 12), Point(24, 29), Point(42, 15), Point(37, 32), Point(15, 35))
 # A rectangle from the upper-left corner to the lower-right corner
-canvas.draw_rectangle((45, 2), Point(80, 27), line_char='#')
+canvas.draw_rectangle(Point(45, 2), Point(80, 27), line_char='#')
 # An n-gon with a high number of points will appear like a circle
 canvas.draw_n_gon(Point(72, 25), 12, 20, 80, "-")
 
