@@ -6,17 +6,14 @@ class Point:
 
     # should return: (2.3/43.14)
     def __str__(self):
-        return self.print_point()
+        return f"({self.x}/{self.y})"
 
     # should return: [(2.3/43.14), (5.53/2.5), (12.2/28.7)]
     def __repr__(self):
-        return self.print_point()
+        return self.__str__()
 
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
-
-    def print_point(self):
-        return f"({self.x}/{self.y})"
 
     def distance_from_origin(self) -> float:
         return (self.x ** 2 + self.y ** 2) ** (1 / 2)
